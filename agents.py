@@ -4,8 +4,11 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from tools import web_search , scrape_url 
 from dotenv import load_dotenv
+import os
 
 load_dotenv()
+
+MISTRAL_API_KEY = os.getenv("MISTRAL_API_KEY")
 
 #model setup 
 llm = ChatMistralAI(model = "mistral-small-2506",temperature=0)
