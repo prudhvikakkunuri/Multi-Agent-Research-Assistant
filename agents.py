@@ -1,5 +1,5 @@
 from langchain.agents import create_agent
-from langchain_mistralai import ChatMistralAI
+from langchain_groq import ChatGroq
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from tools import web_search , scrape_url 
@@ -8,10 +8,17 @@ import os
 
 load_dotenv()
 
-MISTRAL_API_KEY = os.getenv("MISTRAL_API_KEY")
-
+GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+if not GROQ_API_KEY:
+    raise ValueError(
+        "GROQ_API_KEY not found. Please add it to your .env file."
+    )
 #model setup 
-llm = ChatMistralAI(model = "mistral-small-2506",temperature=0)
+llm = ChatGroq(
+    model="openai/gpt-oss-120b",
+    temperature=0.2,
+    api_key=GROQ_API_KEY
+)
 
 
 #1st agent 
